@@ -54,7 +54,6 @@ def main() -> None:
     else:
         logger.info("Running in development mode.")
         # ui.run()
-    return None
 
 
 if __name__ == "__main__":

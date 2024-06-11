@@ -42,7 +42,6 @@ def main() -> None:
     logger.warning(
         "The design module was ran as a script. This is not the intended behavior."
     )
-    return None
 
 
 if __name__ == "__main__":
