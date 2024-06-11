@@ -92,11 +92,11 @@ def main() -> None:
             os.environ.get("NATIVE") is not None
             and os.environ.get("NATIVE").strip().lower() == "true"
         ):
-            ui.run(reload=False, native=True, favicon="✨")
+            ui.run(reload=False, native=True, favicon="static/favicon.ico")
         else:
-            ui.run(reload=False, favicon="✨")
+            ui.run(reload=False, favicon="static/favicon.ico")
     else:
-        ui.run(favicon="✨")
+        ui.run(favicon="static/favicon.ico")
 
 
 if __name__ in {"__main__", "__mp_main__"}:
