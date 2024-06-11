@@ -20,14 +20,14 @@ from dotenv import load_dotenv
 from nicegui import ui
 
 # Local imports
-import logging_config
+import logging_config  # noqa: F401, pylint: disable=unused-import
 
 # =============================================================================
 # MARK: Preamble
 # =============================================================================
 
 load_dotenv()
-ENV = os.environ.get("ENVIRONMENT").strip().lower()
+ENV = os.environ.get("ENVI").strip().lower()
 
 # Setup logging
 logger = logging.getLogger(__name__)
