@@ -6,3 +6,4 @@ nicegui             # https://github.com/zauberzeug/nicegui/        Streamlit al
 niquests            # https://github.com/jawah/niquests             Better "requests"
 pandas              # https://github.com/pandas-dev/pandas/         Dataframes and data manipulation
 plotly              # https://github.com/plotly/plotly.py           Plots and charts
+schedule            # https://github.com/dbader/schedule            Job scheduling

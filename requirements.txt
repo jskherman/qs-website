@@ -165,6 +165,8 @@ qh3==1.0.7
     # via urllib3-future
 requests==2.32.3
     # via nicegui
+schedule==1.2.2
+    # via -r requirements.in
 simple-websocket==1.0.0
     # via python-engineio
 six==1.16.0
