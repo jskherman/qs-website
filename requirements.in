@@ -1,0 +1,8 @@
+pip-tools           # https://github.com/jazzband/pip-tools         Better dependency management than pip freeze
+python-dotenv       # https://github.com/theskumar/python-dotenv    Environment variables
+python-json-logger  # https://github.com/madzak/python-json-logger  JSON logging
+ipywidgets          #                                               Interactive Jupyter notebook widgets
+nicegui             # https://github.com/zauberzeug/nicegui/        Streamlit alternative
+niquests            # https://github.com/jawah/niquests             Better "requests"
+pandas              # https://github.com/pandas-dev/pandas/         Dataframes and data manipulation
+plotly              # https://github.com/plotly/plotly.py           Plots and charts
