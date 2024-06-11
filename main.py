@@ -16,11 +16,13 @@ Remember to set ui.run(reload=False) when pushing to production.
 
 # Standard library imports
 import os
+import asyncio
 import logging
 
 # import datetime as dt
 
 # Third party imports
+import schedule
 from dotenv import load_dotenv
 from nicegui import ui, app
 
@@ -53,22 +55,36 @@ def startup_sequence() -> None:
 
     logger.info("Starting the application...")
 
-    # Load the design system
-    # ds.load_design_system()
-
-    # Load the design
-    # ds.load_design()
-
-    # Load the standard components
-    # ds.load_standard_components()
-
-    # Load the page layout
-    # ds.load_page_layout()
-
-    # Load the application logic
-    # ds.load_application_logic()
+    # Schedule the jobs
+    # ...
 
     logger.info("Application started.")
+
+
+async def run_jobs() -> None:
+    """
+    Asynchronous function that schedules and runs jobs based on a predefined schedule.
+
+    This function calculates the number of seconds until the next job is scheduled to run,
+    sleeps for that amount of time, and then runs the pending job. It continues this process
+    until there are no more jobs scheduled.
+    """
+    # Get the number of seconds until the next job
+    seconds = schedule.idle_seconds()
+
+    # Run the job scheduler
+    while seconds is not None:
+        # If there are seconds to wait
+        if seconds > 0:
+            # Sleep exactly the right amount of time to the next job
+            await asyncio.sleep(seconds)
+        schedule.run_pending()
+        seconds = schedule.idle_seconds()
+
+    # # Way: Run the job scheduler continuously
+    # while True:
+    #     schedule.run_pending()
+    #     await asyncio.sleep(0.1)
 
 
 # =============================================================================
@@ -81,6 +97,7 @@ def main() -> None:
 
     # Run the startup sequence
     app.on_startup(startup_sequence)
+    app.on_startup(run_jobs)
 
     def notify_me():
         ui.notify("Hello, World!")
