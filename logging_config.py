@@ -103,8 +103,11 @@ LOGGING = {
             "filters": ["sensitive_data_filter"],
         },
         "app": {
-            "class": "logging.FileHandler",
-            "filename": f"logs/{dt.datetime.today().strftime('%Y-%m')}.log",
+            "class": "logging.handlers.TimedRotatingFileHandler",
+            "filename": "logs/app.log",
+            "when": "midnight",
+            "backupCount": 30,
+            "utc": True,
             "formatter": "json",
             "filters": ["sensitive_data_filter"],
         },
@@ -129,7 +132,6 @@ if __name__ == "__main__":
     logger = logging.getLogger("logging_config")
 
     logger.warning(
-        "This message contains %s and a credit card number %s.",
-        "john Doe Smith",
+        "This message contains a credit card number: %s.",
         "1234 5678 9101 1121",
     )
