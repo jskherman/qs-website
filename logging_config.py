@@ -62,7 +62,7 @@ class SensitiveDataFilter(logging.Filter):
 
         # Modify the log record to mask sensitive data
         record.msg = self.mask_sensitive_data(record.msg)
-        return True
+        return record.name != "watchfiles.main"
 
     def mask_sensitive_data(self, message):
         """
@@ -117,7 +117,7 @@ LOGGING = {
             "handlers": ["stdout", "app"],
             "level": (
                 "INFO"
-                if os.environ.get("ENVIRONMENT").strip().lower() == "production"
+                if os.environ.get("ENVI").strip().lower() == "production"
                 else "DEBUG"
             ),
         }
