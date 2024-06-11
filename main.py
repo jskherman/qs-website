@@ -99,10 +99,11 @@ def main() -> None:
     app.on_startup(startup_sequence)
     app.on_startup(run_jobs)
 
-    def notify_me():
-        ui.notify("Hello, World!")
+    # Add static files
+    app.add_static_files("/static", "static")
 
-    ui.button("Click me!", on_click=notify_me)
+    # Placeholder functionality
+    ui.button("Click me!", on_click=lambda: ui.notify("Hello, World!"))
 
     if ENV == "production":
         if (
