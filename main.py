@@ -22,11 +22,11 @@ import logging
 
 # Third party imports
 from dotenv import load_dotenv
-from nicegui import ui
+from nicegui import ui, app
 
 # Local imports
 # import design as ds
-import logging_config
+import logging_config  # noqa: F401, pylint: disable=unused-import
 
 # =============================================================================
 # MARK: Preamble
@@ -34,10 +34,41 @@ import logging_config
 
 # Load environment variables
 load_dotenv()
-ENV = os.environ.get("ENVIRONMENT").strip().lower()
+ENV = os.environ["ENVI"].strip().lower()
 
 # Setup logging
 logger = logging.getLogger(__name__)
+
+
+def startup_sequence() -> None:
+    """
+    This function contains the startup sequence for the application. It is
+    called at the beginning of the main() function.
+    """
+
+    if ENV == "production":
+        logger.info("Running in production mode.")
+    else:
+        logger.info("Running in development mode.")
+
+    logger.info("Starting the application...")
+
+    # Load the design system
+    # ds.load_design_system()
+
+    # Load the design
+    # ds.load_design()
+
+    # Load the standard components
+    # ds.load_standard_components()
+
+    # Load the page layout
+    # ds.load_page_layout()
+
+    # Load the application logic
+    # ds.load_application_logic()
+
+    logger.info("Application started.")
 
 
 # =============================================================================
@@ -48,13 +79,25 @@ def main() -> None:
     This is the main function. Need I say more?
     """
 
-    if os.environ.get("ENVIRONMENT").strip().lower() == "production":
-        logger.info("Running in production mode.")
-        # ui.run(reload=False)
+    # Run the startup sequence
+    app.on_startup(startup_sequence)
+
+    def notify_me():
+        ui.notify("Hello, World!")
+
+    ui.button("Click me!", on_click=notify_me)
+
+    if ENV == "production":
+        if (
+            os.environ.get("NATIVE") is not None
+            and os.environ.get("NATIVE").strip().lower() == "true"
+        ):
+            ui.run(reload=False, native=True, favicon="✨")
+        else:
+            ui.run(reload=False, favicon="✨")
     else:
-        logger.info("Running in development mode.")
-        # ui.run()
+        ui.run(favicon="✨")
 
 
-if __name__ == "__main__":
+if __name__ in {"__main__", "__mp_main__"}:
     main()
