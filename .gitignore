@@ -240,3 +240,6 @@ $RECYCLE.BIN/
 # Log files
 *.log
 logs
+
+# Wakatime project name
+.wakatime-project
