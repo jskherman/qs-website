@@ -28,7 +28,8 @@ from nicegui import ui, app
 
 # Local imports
 # import design as ds
-import logging_config  # noqa: F401, pylint: disable=unused-import
+# import logging_config  # noqa: F401, pylint: disable=unused-import
+import homepage
 
 # =============================================================================
 # MARK: Preamble
@@ -103,18 +104,34 @@ def main() -> None:
     app.add_static_files("/static", "static")
 
     # Placeholder functionality
-    ui.button("Click me!", on_click=lambda: ui.notify("Hello, World!"))
+    # ui.button("Click me!", on_click=lambda: ui.notify("Hello, World!"))
+    homepage.create()
 
     if ENV == "production":
         if (
             os.environ.get("NATIVE") is not None
             and os.environ.get("NATIVE").strip().lower() == "true"
         ):
-            ui.run(reload=False, native=True, favicon="static/favicon.ico")
+            ui.run(
+                reload=False,
+                native=True,
+                favicon="static/favicon.ico",
+                title="how is jskherman?",
+                storage_secret=os.environ.get("STORAGE_SECRET"),
+            )
         else:
-            ui.run(reload=False, favicon="static/favicon.ico")
+            ui.run(
+                reload=False,
+                favicon="static/favicon.ico",
+                title="how is jskherman?",
+                storage_secret=os.environ.get("STORAGE_SECRET"),
+            )
     else:
-        ui.run(favicon="static/favicon.ico")
+        ui.run(
+            favicon="static/favicon.ico",
+            title="how is jskherman?",
+            storage_secret=os.environ.get("STORAGE_SECRET"),
+        )
 
 
 if __name__ in {"__main__", "__mp_main__"}:
