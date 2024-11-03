@@ -42,8 +42,8 @@ color_palette = {
     "primary": "#006A8A",
     "secondary": "#08415C",
     "accent": "#cf3965",
-    "positive": "#08A045",
-    "negative": "#9C0D38",
+    "positive": "#3fa63f",
+    "negative": "#ee5f5b",
     "warning": "#FFBD00",
 }
 
@@ -54,7 +54,6 @@ color_palette = {
 
 
 class message(ui.label):
-
     def __init__(self, text: str) -> None:
         super().__init__(text)
         self.classes("text-h4 text-grey-8")
